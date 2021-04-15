@@ -23,6 +23,10 @@ header {
     flex-wrap: wrap;
 }
 
+.timer {
+    padding-right: 30px;
+}
+
 main {
    padding: 150px 450px 250px 450px;
     text-align: center;
