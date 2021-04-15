@@ -1,12 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Coding Quiz</title>
 </head>
+
 <body>
+    <header>
+        <!--High Score-->
+        <!--Make into link to pull high score from local storage-->
+        <div id="highscore">
+            High Score
+        </div>
+        <!--Timer-->
+        <div id="timer">Time Left:</div>
+    </header>
+    <main>
+        <h2>Coding Quiz</h2>
+        <p>Try to answer the following code-related questions within the time limit.
+            Keep in mind that incorrect answers will penalize your score/time by ten seconds!
+        </p>
+        <!--Answer Choice Container-->
+        <ul id="choices"></ul>
+        <!--Start Quiz-->
+        <button id="start">Start Quiz</button>
+        <!--Notification if the answer is correct or not-->
+        <div id="result"></div>
+    </main>
     <script src="./assets/script.js"></script>
 </body>
+
 </html>
