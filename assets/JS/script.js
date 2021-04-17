@@ -49,7 +49,7 @@ var quizQuestions = [{
 {
     question: "A very useful toll used during development and debugging for printing content to the debugger is:",
     choiceA: "console.log",
-    choiceB: "Bterminal/bash",
+    choiceB: "terminal/bash",
     choiceC: "for loops",
     choiceD: "JavaScript",
     correctAnswer: "choiceA"
@@ -61,15 +61,19 @@ var score = 0;
 var timerEl = document.getElementById('timer');
 var startBtn = document.getElementById('start');
 var wrapperEl = document.getElementById('wrapper');
-var quizEl = document.getElementById('quiz')
+var quizEl = document.getElementById('quiz');
+var timeLeft = 75;
+var lastQuestion = false;
+
+
 
 //Timer 
 function countdown() {
-    var timeLeft = 75;
 
     var timeInterval = setInterval(function () {
         if (timeLeft > 1) {
             timerEl.textContent = 'Time Left: ' + timeLeft;
+            if (lastQuestion) return clearInterval(timeInterval);
             timeLeft--;
         } else {
             timerEl.textContent = '';
@@ -86,11 +90,11 @@ function countdown() {
 //Remove start button
 // Unhide choices
 // Current Quiz answers to buttons
-var choices =document.getElementById("choices");
-var choiceA =document.getElementById("choiceA");
-var choiceB =document.getElementById("choiceB");
-var choiceC =document.getElementById("choiceC");
-var choiceD =document.getElementById("choiceD");
+var choices = document.getElementById("choices");
+var choiceA = document.getElementById("choiceA");
+var choiceB = document.getElementById("choiceB");
+var choiceC = document.getElementById("choiceC");
+var choiceD = document.getElementById("choiceD");
 var currentIndex = 0;
 // var currentQuizObj = quizQuestions[currentIndex];
 
@@ -104,7 +108,7 @@ function quizDisplay(index) {
     choiceB.innerHTML = quizQuestions[index].choiceB;
     choiceC.innerHTML = quizQuestions[index].choiceC;
     choiceD.innerHTML = quizQuestions[index].choiceD;
-   };
+};
 
 //check answer function
 //Compare user input to correct answer in quizQuestion Objects
@@ -116,24 +120,54 @@ choiceA.addEventListener("click", checkAnswer);
 choiceB.addEventListener("click", checkAnswer);
 choiceC.addEventListener("click", checkAnswer);
 choiceD.addEventListener("click", checkAnswer);
+var result = document.getElementById("result");
 
 function checkAnswer(e) {
     //pulls ID of user input
     var userInput = e.target.id;
     // if statement to confirm userInput matches correctAnswer
     if (userInput === quizQuestions[currentIndex].correctAnswer) {
+        result.innerHTML = "correct";
         console.log("correct!");
 
     } else {
+        result.innerHTML = "wrong";
+        timeLeft -= 10;
         console.log("wrong");
 
     }
     //Increament current Index to move to next question in the array. 
     currentIndex++;
 
-    //Display new questions and answer option. 
-    quizDisplay (currentIndex);
+    //create and if statement to determine the end of the project
+    if (currentIndex === quizQuestions.length || timeLeft === 0) {
+        quizOver();
+    } else {
+
+        //Display new questions and answer option. 
+        setTimeout(function () {
+            quizDisplay(currentIndex);
+            result.innerHTML = "";
+        }, 500);
+    }
 
 };
+
+function quizOver() {
+    quizEl.remove();
+    choices.remove();
+    lastQuestion = true;
+    console.log(timeLeft);
+
+
+
+
+
+    //display final score and prompt to enter intials
+    //create input field for initials 
+    // create submit button
+    //save value of input field to variable for local storage
+    //save input to local storage on button click 
+}
 
 startBtn.onclick = countdown;
