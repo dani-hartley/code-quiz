@@ -16,7 +16,7 @@ body {
 }
 
 header { 
-    padding: 20px 0px 20px 0px;
+    padding: 20px 20px 20px 20px;
     color: var(--secondary-color);
     display: flex;
     justify-content: space-between;
@@ -47,4 +47,19 @@ button {
 
 button:hover {
     opacity: 0.5;
+}
+
+#choices {
+    display: none;
+}
+
+ul {
+    list-style: none;
+
+}
+
+ul li {
+    padding: 10px;
+    text-align: left;
+
 }
