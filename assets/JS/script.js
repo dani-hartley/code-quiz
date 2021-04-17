@@ -20,7 +20,7 @@ var quizQuestions = [{
     choiceB: "booleans",
     choiceC: "alerts",
     choiceD: "numbers",
-    correctAnswer: "alerts"
+    correctAnswer: "choiceC"
 },
 {
     question: "The condition in an if / else statement is enclosed with ____________.",
@@ -28,15 +28,15 @@ var quizQuestions = [{
     choiceB: "curly brackets",
     choiceC: "parenthesis",
     choiceD: "square brackets",
-    correctAnswer: "parenthesis"
+    correctAnswer: "choiceC"
 },
 {
     question: "String values must be enclosed within _______ when being assigned to variables",
     choiceA: "commas",
-    choiceB: "curly brackets",
-    choiceC: "quotes",
+    choiceB: "quotes",
+    choiceC: "curly brackets",
     choiceD: "parenthesis",
-    correctAnswer: "quotes"
+    correctAnswer: "choiceB"
 },
 {
     question: "Arrays in JavaScript can be used to store ___________.",
@@ -44,15 +44,15 @@ var quizQuestions = [{
     choiceB: "other arrays",
     choiceC: "booleans",
     choiceD: "all of the above",
-    correctAnswer: "all of the above"
+    correctAnswer: "choiceD"
 },
 {
     question: "A very useful toll used during development and debugging for printing content to the debugger is:",
-    choiceA: "JavaScript",
+    choiceA: "console.log",
     choiceB: "Bterminal/bash",
     choiceC: "for loops",
-    choiceD: "console.log",
-    correctAnswer: "console log"
+    choiceD: "JavaScript",
+    correctAnswer: "choiceA"
 },
 ]
 
@@ -76,7 +76,7 @@ function countdown() {
             clearInterval(timeInterval);
         }
     }, 1000);
-    quizDisplay();
+    quizDisplay(currentIndex);
 };
 
 
@@ -92,19 +92,48 @@ var choiceB =document.getElementById("choiceB");
 var choiceC =document.getElementById("choiceC");
 var choiceD =document.getElementById("choiceD");
 var currentIndex = 0;
-var currentQuizObj = quizQuestions[currentIndex];
+// var currentQuizObj = quizQuestions[currentIndex];
 
 
 
-function quizDisplay() {
-    quizEl.innerHTML = currentQuizObj.question;
+function quizDisplay(index) {
+    quizEl.innerHTML = quizQuestions[index].question;
     startBtn.remove();
     choices.style.display = "inline-block";
-    choiceA.innerHTML = currentQuizObj.choiceA;
-    choiceB.innerHTML = currentQuizObj.choiceB;
-    choiceC.innerHTML = currentQuizObj.choiceC;
-    choiceD.innerHTML = currentQuizObj.choiceD;
+    choiceA.innerHTML = quizQuestions[index].choiceA;
+    choiceB.innerHTML = quizQuestions[index].choiceB;
+    choiceC.innerHTML = quizQuestions[index].choiceC;
+    choiceD.innerHTML = quizQuestions[index].choiceD;
+   };
 
-}
+//check answer function
+//Compare user input to correct answer in quizQuestion Objects
+//Notify user the answer was correct or incorrect
+//If incorrect deduction 10 seconds
+
+//Eventlistener to know that button has been clicked
+choiceA.addEventListener("click", checkAnswer);
+choiceB.addEventListener("click", checkAnswer);
+choiceC.addEventListener("click", checkAnswer);
+choiceD.addEventListener("click", checkAnswer);
+
+function checkAnswer(e) {
+    //pulls ID of user input
+    var userInput = e.target.id;
+    // if statement to confirm userInput matches correctAnswer
+    if (userInput === quizQuestions[currentIndex].correctAnswer) {
+        console.log("correct!");
+
+    } else {
+        console.log("wrong");
+
+    }
+    //Increament current Index to move to next question in the array. 
+    currentIndex++;
+
+    //Display new questions and answer option. 
+    quizDisplay (currentIndex);
+
+};
 
 startBtn.onclick = countdown;
