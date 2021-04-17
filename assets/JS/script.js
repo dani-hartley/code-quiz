@@ -76,7 +76,7 @@ function countdown() {
             clearInterval(timeInterval);
         }
     }, 1000);
-    display();
+    quizDisplay();
 };
 
 
@@ -86,6 +86,25 @@ function countdown() {
 //Remove start button
 // Unhide choices
 // Current Quiz answers to buttons
+var choices =document.getElementById("choices");
+var choiceA =document.getElementById("choiceA");
+var choiceB =document.getElementById("choiceB");
+var choiceC =document.getElementById("choiceC");
+var choiceD =document.getElementById("choiceD");
+var currentIndex = 0;
+var currentQuizObj = quizQuestions[currentIndex];
 
+
+
+function quizDisplay() {
+    quizEl.innerHTML = currentQuizObj.question;
+    startBtn.remove();
+    choices.style.display = "inline-block";
+    choiceA.innerHTML = currentQuizObj.choiceA;
+    choiceB.innerHTML = currentQuizObj.choiceB;
+    choiceC.innerHTML = currentQuizObj.choiceC;
+    choiceD.innerHTML = currentQuizObj.choiceD;
+
+}
 
 startBtn.onclick = countdown;
