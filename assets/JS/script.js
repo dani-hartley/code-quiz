@@ -155,26 +155,38 @@ function checkAnswer(e) {
 
 var endScreen = document.getElementById("end-screen");
 var finalScore = document.getElementById("final-score");
+var userInitials = document.getElementById("initials").value;
 
 function quizOver() {
+    //Remove the last question
     quizEl.remove();
     choices.remove();
     result.remove();
+    //Stop timer
     lastQuestion = true;
+    //Display End Screen with score
     endScreen.classList.remove('hide');
-    finalScore.innerHTML= timeLeft;
-    console.log(timeLeft);
+    finalScore.innerHTML = timeLeft;
 
-
-
-
-
-
-    //display final score and prompt to enter intials
-    //create input field for initials 
-    // create submit button
-    //save value of input field to variable for local storage
-    //save input to local storage on button click 
+    //Capture Initials from Submit button
+    var submit = document.getElementById("submit")
+    submit.addEventListener("click", function highscore() {
+        var userInitials = document.getElementById("initials").value;
+        if (userInitials === ""){
+        alert ("Please add Initials")
+        return
+    } else {
+        var finalScore = {
+            initials: userInitials,
+            score: timeLeft
+        }
+        console.log(finalScore);
+    }
+    //store in local storage
+    })
+   
+    
+    
 }
 
 startBtn.onclick = countdown;
