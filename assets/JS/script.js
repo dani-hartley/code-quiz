@@ -153,11 +153,18 @@ function checkAnswer(e) {
 
 };
 
+var endScreen = document.getElementById("end-screen");
+var finalScore = document.getElementById("final-score");
+
 function quizOver() {
     quizEl.remove();
     choices.remove();
+    result.remove();
     lastQuestion = true;
+    endScreen.classList.remove('hide');
+    finalScore.innerHTML= timeLeft;
     console.log(timeLeft);
+
 
 
 
