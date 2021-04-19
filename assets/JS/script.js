@@ -78,6 +78,7 @@ function countdown() {
         } else {
             timerEl.textContent = '';
             clearInterval(timeInterval);
+            quizOver();
         }
     }, 1000);
     quizDisplay(currentIndex);
