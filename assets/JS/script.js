@@ -155,7 +155,7 @@ function checkAnswer(e) {
 
 var endScreen = document.getElementById("end-screen");
 var finalScore = document.getElementById("final-score");
-var userInitials = document.getElementById("initials").value;
+var userInput = document.getElementById("initials");
 
 function quizOver() {
     //Remove the last question
@@ -171,22 +171,37 @@ function quizOver() {
     //Capture Initials from Submit button
     var submit = document.getElementById("submit")
     submit.addEventListener("click", function highscore() {
-        var userInitials = document.getElementById("initials").value;
-        if (userInitials === ""){
-        alert ("Please add Initials")
-        return
-    } else {
-        var finalScore = {
-            initials: userInitials,
-            score: timeLeft
+        var userInitials = userInput.value;
+        if (userInitials === null) {
+            alert("Please add Initials")
+            return
+        } else {
+            var finalScore = {
+                initials: userInitials,
+                score: timeLeft
+            };
+            console.log(finalScore);
+            var userScore = localStorage.getItem('userScore');
+            if (userScore === null) {
+                userScore = [];
+            } else {
+                userScore = JSON.parse(userScore);
+            }
+            userScore.push(finalScore);
+            var newScore = JSON.stringify(userScore);
+            localStorage.setItem("userScore", newScore);
+            scoreDisplay();
         }
-        console.log(finalScore);
-    }
-    //store in local storage
     })
-   
     
-    
+};
+
+var scoreBoard = document.getElementById("score-screen");
+
+function scoreDisplay() {
+    endScreen.classList.add('hide');
+    scoreBoard.classList.remove('hide');
+
 }
 
 startBtn.onclick = countdown;
