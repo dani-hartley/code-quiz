@@ -12,10 +12,6 @@
 <body>
     <header>
         <!--High Score-->
-        <!--Make into link to pull high score from local storage-->
-        <div id="highscore">
-            High Score
-        </div>
         <!--Timer-->
         <div id="timer"></div>
     </header>
@@ -27,7 +23,7 @@
             </p>
         </div>
         <!--Answer Choice Container-->
-        <ul id="choices">
+        <ul id="choices" class="hide">
             <li><button id="choiceA"></button></li>
             <li><button id="choiceB"></button></li>
             <li><button id="choiceC"></button></li>
@@ -42,17 +38,23 @@
             <h2>All done!</h2>
             <p>Your final score is <span id="final-score"></span>.</p>
             <p>
-              Enter initials: <input type="text" id="initials" max="3" />
-              <button id="submit">Submit</button>
+                Enter initials: <input type="text" id="initials" max="3" />
+                <button id="submit">Submit</button>
             </p>
-          </div>
+        </div>
 
-          <div id="score-screen" class="hide">
-              <div id ="score-header">
-                  <h3>Scoreboard</h3>
-              </div>
-              <ul id = "score-results"></ul>
-          </div>
+        <div id="score-screen" class="hide">
+            <div id="score-header">
+                <h3>Scoreboard</h3>
+            </div>
+            <div>
+                <ul id="score-results"></ul>
+            </div>
+            <div>
+                <button id="clear">Clear</button>
+                <button id="playAgain">Play Again</button>
+            </div>
+        </div>
 
     </main>
     <script src="./assets/JS/script.js"></script>

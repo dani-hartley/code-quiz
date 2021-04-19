@@ -127,11 +127,11 @@ function checkAnswer(e) {
     var userInput = e.target.id;
     // if statement to confirm userInput matches correctAnswer
     if (userInput === quizQuestions[currentIndex].correctAnswer) {
-        result.innerHTML = "correct";
+        result.innerHTML = "CORRECT!";
         console.log("correct!");
 
     } else {
-        result.innerHTML = "wrong";
+        result.innerHTML = "WRONG";
         timeLeft -= 10;
         console.log("wrong");
 
@@ -142,6 +142,7 @@ function checkAnswer(e) {
     //create and if statement to determine the end of the project
     if (currentIndex === quizQuestions.length || timeLeft === 0) {
         quizOver();
+
     } else {
 
         //Display new questions and answer option. 
@@ -150,12 +151,13 @@ function checkAnswer(e) {
             result.innerHTML = "";
         }, 500);
     }
-
 };
 
 var endScreen = document.getElementById("end-screen");
 var finalScore = document.getElementById("final-score");
 var userInput = document.getElementById("initials");
+var scoreBoard = document.getElementById("score-screen");
+var scoreList = document.getElementById('score-results');
 
 function quizOver() {
     //Remove the last question
@@ -174,7 +176,7 @@ function quizOver() {
         var userInitials = userInput.value;
         if (userInitials === null) {
             alert("Please add Initials")
-            return
+            return;
         } else {
             var finalScore = {
                 initials: userInitials,
@@ -193,15 +195,37 @@ function quizOver() {
             scoreDisplay();
         }
     })
-    
+
 };
-
-var scoreBoard = document.getElementById("score-screen");
-
+//Display Score page
 function scoreDisplay() {
     endScreen.classList.add('hide');
     scoreBoard.classList.remove('hide');
+    // Display local storage
+    var userScore = localStorage.getItem("userScore");
+    userScore = JSON.parse(userScore);
+    console.log(userScore);
+    //pull local storage and displaying on Scoreboard
+    if (userScore !== null) {
+        for (var i = 0; i < userScore.length; i++) {
+            var createLi = document.createElement("li");
+            createLi.innerText = userScore[i].initials + " " + userScore[i].score;
+            scoreList.appendChild(createLi);
+        }
+    }
+};
 
-}
+var clear = document.getElementById("clear");
+var playAgain = document.getElementById("playAgain");
+
+//Clear Local Storage
+clear.addEventListener("click", function clearScore() {
+    window.localStorage.clear();
+    scoreList.remove();
+});
+//Replay game
+playAgain.addEventListener("click", function playAgain() {
+    location.reload();
+})
 
 startBtn.onclick = countdown;

@@ -28,8 +28,9 @@ header {
 }
 
 main {
-   padding: 150px 450px 250px 450px;
-    text-align: center;
+   margin: 150px 450px 250px 450px;
+   border: black solid 3px;
+   text-align: center;
 }
 
 main h2, main p, main ul {
@@ -49,13 +50,10 @@ button:hover {
     opacity: 0.5;
 }
 
-#choices {
-    display: none;
-}
 
 ul {
     list-style: none;
-
+    display: inline-block;
 }
 
 ul li {
@@ -66,4 +64,10 @@ ul li {
 
 .hide {
     display: none;
+}
+
+#result {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--secondary-color);
 }
